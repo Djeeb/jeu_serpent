@@ -71,8 +71,7 @@ window.onload = function () {
       this.body.unshift(nextPosition);
       this.body.pop();
     };
-    this.setDirection(newDirection);
-    {
+    this.setDirection = function (newDirection) {
       var allowedDirections;
       switch (this.direction) {
         case "left":
@@ -89,7 +88,7 @@ window.onload = function () {
       if (allowedDirections.indexOf(newDirection) > -1) {
         this.direction = newDirection;
       }
-    }
+    };
   }
 
   document.onkeydown = function handleKeyDown(e) {
