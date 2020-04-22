@@ -9,6 +9,7 @@ window.onload = function () {
   var widthInBlocks = canvasWidth / blockSize;
   var heightInBlocks = canvasHeight / blockSize;
   var score;
+  var timeout;
 
   init();
 
@@ -54,9 +55,10 @@ window.onload = function () {
       drawScore();
       snakee.draw();
       applee.draw();
-      setTimeout(refreshCanvas, delay);
+      timeout = setTimeout(refreshCanvas, delay);
     }
   }
+
   function gameOver() {
     ctx.save();
     ctx.font = "bold 70px sans-serif";
@@ -96,6 +98,7 @@ window.onload = function () {
     );
     applee = new Apple([10, 10]);
     score = 0;
+    clearTimeout(timeout);
     refreshCanvas();
   }
 
@@ -110,6 +113,7 @@ window.onload = function () {
     ctx.fillText(score.toString(), centreX, centreY);
     ctx.restore();
   }
+
   function drawBlock(ctx, position) {
     var x = position[0] * blockSize;
     var y = position[1] * blockSize;
@@ -191,7 +195,6 @@ window.onload = function () {
           snakeCollision = true;
         }
       }
-
       return wallCollision || snakeCollision;
     };
     this.isEatingApple = function (appleToEat) {
